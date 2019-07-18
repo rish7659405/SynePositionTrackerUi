@@ -1,0 +1,127 @@
+<!--<p-table [columns]="cols" [value]="open_positions">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-openposition let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                    {{open_positions[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>-->
+<h3>Open-Positions-Details</h3>
+<p-table [columns]="cols" [value]="open_positions" (onRowExpand)="populateDetails($event)" dataKey="syneOptId">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th style="width: 3em"></th>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+        <tr>
+            <td>
+                <a href="#" [pRowToggler]="rowData">
+                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                </a>
+            </td>
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion"  let-rowData let-columns="columns" >
+        <tr>
+            <td [attr.colspan]="columns.length + 1">
+                 <p-accordion *ngIf="rowData.candidates" (onRowExpand)="populateDetails1(syneOptId)" >
+                    <p-accordionTab [header]="submission.candidateName"  *ngFor= "let submission of rowData.candidates">
+                           
+                            <app-stepper></app-stepper>
+                          
+                            
+                            
+                                    <div class="ui-g">
+                                        <div class="ui-g-12">
+                                            <b>Syne-Submission-Id:</b>   {{submission.syneSubmissionId}} 
+                                        </div>
+                                        <div class="ui-g-12">
+                                            <b>Submission Date:</b>  {{submission.submissionDate}} 
+                                        </div>
+                                        <div class="ui-g-12">
+                                            <b>Client Response:</b> {{submission.clientResponse}} 
+                                        </div>
+                                        <div class="ui-g-12">
+                                            <b>Skill-Set:</b> {{submission.skillSet}} 
+                                        </div>
+                                        <div class="ui-g-12">
+                                                <b>Experience:</b>     {{submission.experience}} 
+                                            </div>
+                                            <div class="ui-g-12">
+                                                    <b>Current Location:</b>  {{submission.currentLocation}}  
+                                                </div>
+                                                <div class="ui-g-12">
+                                                        <b>Preffered Location:</b>  {{submission.prefferedLocation}} 
+                                                    </div>
+                                                    <div class="ui-g-12">
+                                                            <b>current Company:</b> {{submission.currentCompany}} 
+                                                        </div>
+                                                     <div class="ui-g-12">
+                                                                <b>Submission Status:</b>{{submission.submissionStatus}} 
+                                                            </div>
+                                                 <div class="ui-g-12">
+                                                                    <b>Selection Status:</b>  {{submission.selectionStatus}} 
+                                                                </div>
+                                                 <div class="ui-g-12">
+                                                                        <b>L1 Panelist:</b>{{submission.l1panelist}} 
+                                                           </div>
+                                                                    <div class="ui-g-12">
+                                                                            <b>L1 panelist2:</b>{{submission.l1panelist2}} 
+                                                                        </div>
+                                                                        <div class="ui-g-12">
+                                                                                <b>L1 InterviewDate:</b> {{submission.l1interviewDate}} 
+                                                                            </div>
+                                                                            <div class="ui-g-12">
+                                                                                    <b>L2 InterviewDate:</b>{{submission.l2interviewDate}} 
+                                                                                </div>
+                                                                                <div class="ui-g-12">
+                                                                                        <b>L3 InterviewDate:</b> {{submission.l3interviewDate}} 
+                                                                                    </div>
+                                                                                    <div class="ui-g-12">
+                                                                                            <b>Selected:</b>  {{submission.selected}}
+                                                                                        </div>
+                                                                                        <div class="ui-g-12">
+                                                                                                <b>Dropout:</b>  {{submission.dropout}}
+                                                                                            </div>
+                                                                </div>
+                                                                    
+                            
+                        
+                          
+                         
+                            
+                             
+                            
+                           
+                           
+
+                    </p-accordionTab>                   
+                
+                </p-accordion> 
+               
+                <p *ngIf="!rowData.candidates || rowData.candidates.length == 0">No candidates selected for this position</p>
+            </td>
+        </tr>
+    
+
+
+
+    </ng-template>
+</p-table>
+
+
