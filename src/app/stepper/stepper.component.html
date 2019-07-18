@@ -1,0 +1,69 @@
+<!-- <button mat-raised-button (click)="isOptional = !isOptional">
+        {{!isOptional ? 'Enable optional steps' : 'Disable optional steps'}}
+      </button> 
+       -->
+      <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Applied</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="yes/no" formControlName="firstCtrl" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Application Sent On</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="yes/no" formControlName="secondCtrl" required>
+            </mat-form-field>
+            <div>
+              <!-- <button mat-button matStepperPrevious>Back</button> -->
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="thirdFormGroup">
+                <form [formGroup]="thirdFormGroup">
+                  <ng-template matStepLabel>L1: Technical Round</ng-template>
+                  <mat-form-field>
+                    <input matInput placeholder="yes/no" formControlName="thirdCtrl" required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="fourthFormGroup">
+                    <form [formGroup]="fourthFormGroup">
+                      <ng-template matStepLabel>L2: Managerial Round</ng-template>
+                      <mat-form-field>
+                        <input matInput placeholder="yes/no" formControlName="fourthCtrl" required>
+                      </mat-form-field>
+                      <div>
+                        <button mat-button matStepperNext>Next</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step [stepControl]="fifthFormGroup">
+                        <form [formGroup]="fifthFormGroup">
+                          <ng-template matStepLabel>Awaiting HR/PMO Action</ng-template>
+                          <mat-form-field>
+                            <input matInput placeholder="yes/no" formControlName="fifthCtrl" required>
+                          </mat-form-field>
+                          <div>
+                            <button mat-button matStepperNext>Next</button>
+                          </div>
+                        </form>
+                      </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>L4: Project Allocation</ng-template>
+           <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div> 
+        </mat-step>
+      </mat-horizontal-stepper> 
